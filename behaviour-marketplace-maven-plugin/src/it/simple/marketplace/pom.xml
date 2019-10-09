@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.paremus.brain.iot.maven.test</groupId>
+    <artifactId>marketplace</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.paremus.brain.iot.maven.test</groupId>
+            <artifactId>behaviour</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>smart-behaviour</classifier>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+			    <groupId>com.paremus.brain.iot.maven</groupId>
+				<artifactId>behaviour-marketplace-maven-plugin</artifactId>
+				<version>@project.version@</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+    
+</project>
