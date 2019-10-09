@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.paremus.brain.iot</groupId>
+        <artifactId>behaviour-marketplace</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.paremus.brain.iot.marketplace</groupId>
+    <artifactId>security-light-marketplace</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <description>
+        The Security Light Behaviour Marketplace - A simple example marketplace
+    </description>
+    
+    <distributionManagement>
+        <site>
+            <id>brain-iot-nexus-marketplace</id>
+            <url>dav:https://nexus.repository-pert.ismb.it/repository/marketplaces/${project.groupId}/${project.artifactId}/${project.version}</url>
+        </site>
+    </distributionManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.paremus.brain.iot.example</groupId>
+            <artifactId>behaviour.impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.paremus.brain.iot.example</groupId>
+            <artifactId>light.impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.paremus.brain.iot.example</groupId>
+            <artifactId>sensor.impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.paremus.brain.iot.maven</groupId>
+				<artifactId>behaviour-marketplace-maven-plugin</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.4</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-webdav-jackrabbit</artifactId>
+                        <version>2.8</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <skip>true</skip>
+                    <inputDirectory>${project.build.directory}/marketplace</inputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
