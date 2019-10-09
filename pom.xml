@@ -58,5 +58,6 @@
     
     <modules>
         <module>behaviour-marketplace-maven-plugin</module>
+        <module>security-light-marketplace</module>
     </modules>
 </project>

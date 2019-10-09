@@ -10,12 +10,18 @@ variables:
   MAVEN_DEPLOY_OPTS: "-DaltReleaseDeploymentRepository=brain-iot-releases::default::https://nexus.repository-pert.ismb.it/repository/maven-releases -DaltSnapshotDeploymentRepository=brain-iot-snapshots::default::https://nexus.repository-pert.ismb.it/repository/maven-snapshots"
 #  CI_DEBUG_TRACE: "true"
 
+# Cache downloaded dependencies and plugins between builds.
+cache:
+  paths:
+    - .m2/repository
+  key: $CI_JOB_NAME
+
 marketplace-build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS package
 
-bms-test:
+marketplace-test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS verify
@@ -25,10 +31,11 @@ bms-test:
     when: always
     expire_in: 1 day
 
-bms-deploy:
+marketplace-deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS clean package org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -am -pl behaviour-marketplace-maven-plugin install org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -pl !:behaviour-marketplace,!behaviour-marketplace-maven-plugin package site:deploy
   artifacts:
     paths:
     - behaviour-marketplace-maven-plugin/target/surefire-reports/*.txt
