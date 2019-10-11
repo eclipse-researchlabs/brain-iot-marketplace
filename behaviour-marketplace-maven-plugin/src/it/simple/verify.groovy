@@ -9,7 +9,7 @@ println 'Tests for behaviour-marketplace-maven-plugin \'simple\''
 println " basedir: ${basedir}"
 
 // Check the behaviour exists!
-File behaviour = new File(basedir, 'behaviour/target/behaviour-0.0.1-SNAPSHOT-smart-behaviour.jar')
+File behaviour = new File(basedir, 'behaviour/target/behaviour-0.0.1-SNAPSHOT-brain-iot-smart-behaviour.jar')
 assert behaviour.isFile()
 
 // Check the top level index exists!
@@ -27,7 +27,7 @@ assert xrp.name() != null;
 
 Resource res = resources.get(0)
 	
-assert "behaviour" == ResourceUtils.getIdentityCapability(res).getAttributes().get("osgi.identity");
+assert "com.paremus.brain.iot.maven.test.behaviour" == ResourceUtils.getIdentityCapability(res).getAttributes().get("osgi.identity");
 
 Capability cap = res.getCapabilities("eu.brain.iot.behaviour").get(0)
 
