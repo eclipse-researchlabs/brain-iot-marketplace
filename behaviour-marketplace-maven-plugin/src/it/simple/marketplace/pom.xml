@@ -12,7 +12,7 @@
             <groupId>com.paremus.brain.iot.maven.test</groupId>
             <artifactId>behaviour</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <classifier>smart-behaviour</classifier>
+            <classifier>brain-iot-smart-behaviour</classifier>
         </dependency>
     </dependencies>
     

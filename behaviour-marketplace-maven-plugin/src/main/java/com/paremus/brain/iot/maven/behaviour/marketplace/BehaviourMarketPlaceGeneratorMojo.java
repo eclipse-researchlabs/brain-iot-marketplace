@@ -8,7 +8,19 @@ package com.paremus.brain.iot.maven.behaviour.marketplace;
 import static aQute.bnd.osgi.resource.ResourceUtils.getContentCapability;
 import static aQute.bnd.osgi.resource.ResourceUtils.getIdentity;
 import static aQute.bnd.osgi.resource.ResourceUtils.getIdentityCapability;
-import static org.osgi.framework.namespace.BundleNamespace.BUNDLE_NAMESPACE;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourDeploymentNamespace.CAPABILITY_REQUIREMENTS_ATTRIBUTE;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourDeploymentNamespace.CAPABILITY_RESOURCES_ATTRIBUTE;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourDeploymentNamespace.CONTENT_MIME_TYPE_INDEX;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourDeploymentNamespace.IDENTITY_TYPE_SMART_BEHAVIOUR;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourDeploymentNamespace.SMART_BEHAVIOUR_DEPLOYMENT_NAMESPACE;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourManifest.BRAIN_IOT_DEPLOY_REQUIREMENTS;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourManifest.BRAIN_IOT_DEPLOY_RESOURCES;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourManifest.BRAIN_IOT_SMART_BEHEAVIOUR_SYMBOLIC_NAME;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourManifest.BRAIN_IOT_SMART_BEHEAVIOUR_VERSION;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourManifest.SMART_BEHAVIOUR_MAVEN_CLASSIFIER;
+import static eu.brain.iot.behaviour.namespace.SmartBehaviourNamespace.SMART_BEHAVIOUR_NAMESPACE;
+import static org.osgi.framework.namespace.IdentityNamespace.CAPABILITY_TYPE_ATTRIBUTE;
+import static org.osgi.framework.namespace.IdentityNamespace.CAPABILITY_VERSION_ATTRIBUTE;
 import static org.osgi.framework.namespace.IdentityNamespace.IDENTITY_NAMESPACE;
 import static org.osgi.service.repository.ContentNamespace.CAPABILITY_MIME_ATTRIBUTE;
 import static org.osgi.service.repository.ContentNamespace.CAPABILITY_URL_ATTRIBUTE;
@@ -35,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.apache.maven.execution.MavenSession;
@@ -57,8 +70,7 @@ import aQute.bnd.osgi.repository.XMLResourceGenerator;
 import aQute.bnd.osgi.repository.XMLResourceParser;
 import aQute.bnd.osgi.resource.CapReqBuilder;
 import aQute.bnd.osgi.resource.ResourceBuilder;
-import eu.brain.iot.eventing.annotation.SmartBehaviourDefinition;
-
+import aQute.bnd.osgi.resource.ResourceUtils;
 
 
 @Mojo(name = "generate", defaultPhase=LifecyclePhase.GENERATE_RESOURCES, requiresDependencyResolution=ResolutionScope.TEST)
@@ -112,7 +124,7 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
 				String link = (String) getContentCapability(r)
 						.getAttributes().get(CAPABILITY_URL_ATTRIBUTE);
 				
-				for(Capability cap : r.getCapabilities(NAMESPACE)) {
+				for(Capability cap : r.getCapabilities(SMART_BEHAVIOUR_NAMESPACE)) {
 					writer.append("        <li>");
 					
 					Map<String, Object> attributes = cap.getAttributes();
@@ -149,7 +161,7 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
 			    goal("unpack-dependencies"),
 			    configuration(
 			        element(name("outputDirectory"), targetFolder.getAbsolutePath()),
-			        element(name("classifier"), "smart-behaviour"),
+			        element(name("classifier"), SMART_BEHAVIOUR_MAVEN_CLASSIFIER),
 			        element(name("useSubDirectoryPerArtifact"), "true")
 			    ),
 			    executionEnvironment(
@@ -176,6 +188,7 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
 				}
 			}
 		} catch (IOException e) {
+			logger.error("A problem occurred generating the behaviour indexes", e);
 			throw new MojoExecutionException("Unable to index the extracted Smart Behaviours", e);
 		}
 	}
@@ -202,10 +215,6 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
 				);
 		return index;
 	}
-
-	private static final String NAMESPACE = SmartBehaviourDefinition.PREFIX_
-            .substring(0, SmartBehaviourDefinition.PREFIX_.length() - 1);
-	public static final String INDEX_MIME_TYPE = "application/vnd.osgi.repository+xml";
 	
     private List<Resource> generateTopLevelIndex() throws Exception {
     	
@@ -215,24 +224,32 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
 
         for (Path folder : indexes.keySet()) {
         	
-        	Path index = indexes.get(folder);
+        	Attributes manifest = manifests.get(folder).getMainAttributes();
         	
+        	ResourceBuilder builder = new ResourceBuilder();
+        	
+        	// Add the identity capability for this resource
+        	builder.addCapability(generateIdentityCapability(manifest));
+        	
+        	// Add the Deployment Capability for this resource
+        	builder.addCapability(generateDeploymentCapability(folder, manifest));
+
+        	//Add the content capability for this behaviour
+        	Path index = indexes.get(folder);
+
+        	builder.addCapability(generateContentCapability(root, index));
+        	
+        	// Look for any Smart Behaviours listed in the sub-index
 			for (Resource resource : XMLResourceParser.getResources(index.toFile())) {
-				
-				if(!resource.getCapabilities(NAMESPACE).isEmpty()) {
-					
-					ResourceBuilder builder = new ResourceBuilder();
-					builder.addCapabilities(resource.getCapabilities(NAMESPACE));
-					builder.addCapabilities(resource.getCapabilities(IDENTITY_NAMESPACE));
-					builder.addCapabilities(resource.getCapabilities(BUNDLE_NAMESPACE));
-					
-					builder.addCapability(new CapReqBuilder(CONTENT_NAMESPACE)
-							.addAttribute(CAPABILITY_MIME_ATTRIBUTE, INDEX_MIME_TYPE)
-							.addAttribute(CAPABILITY_URL_ATTRIBUTE, root.relativize(index).toString()));
-					
-					behaviours.add(builder.build());
-				}
+				builder.addCapabilities(resource.getCapabilities(SMART_BEHAVIOUR_NAMESPACE));
 			}
+			
+			Resource resource = builder.build();
+			if(resource.getCapabilities(SMART_BEHAVIOUR_NAMESPACE).isEmpty()) {
+				logger.warn("The generated resource for {} has no Smart Behaviour Capabilities advertised",
+						ResourceUtils.getIdentityCapability(resource));
+			}
+			behaviours.add(resource);
         }
 
         XMLResourceGenerator repository = new XMLResourceGenerator();
@@ -243,5 +260,36 @@ public class BehaviourMarketPlaceGeneratorMojo extends AbstractMojo {
         
         return behaviours;
     }
+
+	private CapReqBuilder generateIdentityCapability(Attributes manifest) throws Exception {
+		return new CapReqBuilder(IDENTITY_NAMESPACE)
+				.addAttribute(IDENTITY_NAMESPACE, manifest.getValue(BRAIN_IOT_SMART_BEHEAVIOUR_SYMBOLIC_NAME))
+				.addAttribute(CAPABILITY_VERSION_ATTRIBUTE, manifest.getValue(BRAIN_IOT_SMART_BEHEAVIOUR_VERSION))
+				.addAttribute(CAPABILITY_TYPE_ATTRIBUTE, IDENTITY_TYPE_SMART_BEHAVIOUR);
+	}
+
+	private CapReqBuilder generateDeploymentCapability(Path folder, Attributes manifest)
+			throws MojoExecutionException, Exception {
+		String attributeKey = CAPABILITY_REQUIREMENTS_ATTRIBUTE;
+		String attributeValue = manifest.getValue(BRAIN_IOT_DEPLOY_REQUIREMENTS);
+		if(attributeValue == null) {
+			attributeValue = manifest.getValue(BRAIN_IOT_DEPLOY_RESOURCES);
+			if(attributeValue == null) {
+				logger.error("The manifest for {} does not contain any requirements or resources", folder.getFileName());
+				throw new MojoExecutionException("Invalid Smart Behaviour Manifest for behaviour extracted to path " + folder);
+			}
+			attributeKey = CAPABILITY_RESOURCES_ATTRIBUTE;
+		}
+		
+		CapReqBuilder deploymentCap = new CapReqBuilder(SMART_BEHAVIOUR_DEPLOYMENT_NAMESPACE)
+				.addAttribute(attributeKey, attributeValue);
+		return deploymentCap;
+	}
+
+	private CapReqBuilder generateContentCapability(Path root, Path index) throws Exception {
+		return new CapReqBuilder(CONTENT_NAMESPACE)
+				.addAttribute(CAPABILITY_MIME_ATTRIBUTE, CONTENT_MIME_TYPE_INDEX)
+				.addAttribute(CAPABILITY_URL_ATTRIBUTE, root.relativize(index).toString());
+	}
 
 }
