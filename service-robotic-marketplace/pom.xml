@@ -30,9 +30,11 @@
          <artifactId>door.impl</artifactId>
          <version>0.0.1-SNAPSHOT</version>     
        </dependency>
+       <dependency>
             <groupId>eu.brain.iot.service.robotic</groupId>
             <artifactId>orch.impl</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+      </dependency>
         <dependency>
          <groupId>eu.brain.iot.service.robotic</groupId>
          <artifactId>robotA.impl</artifactId>
