@@ -5,9 +5,7 @@
 
 package com.paremus.brain.iot.installer.test;
 
-import static com.paremus.brain.iot.management.api.ManagementResponseDTO.ResponseCode.BID;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.osgi.framework.Constants.FRAMEWORK_UUID;
 
 import java.io.File;
@@ -139,9 +137,9 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     }
 
     @Test
-    public void testMarketplaceRobotA() throws Exception {
+    public void testMarketplaceRobot() throws Exception {
     	
-    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Smart RobotA)");
+    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Smart Robot)");
     	
     	assertEquals(1, findBehaviours.size());
     	
