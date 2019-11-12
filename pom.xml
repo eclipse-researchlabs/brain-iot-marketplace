@@ -58,8 +58,10 @@
     
     <modules>
         <module>behaviour-marketplace-maven-plugin</module>
-        <module>security-light-marketplace</module>
         <module>water-management-marketplace</module>
+        <!--
+        <module>security-light-marketplace</module>
         <module>service-robotic-marketplace</module>
+        -->
     </modules>
 </project>
