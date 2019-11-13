@@ -102,6 +102,7 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
         Thread.sleep(1000);
 	}
 
+	@Override
     public void notify(ManagementResponseDTO response) {
         System.err.printf("TEST response code=%s \n", response.code);
         queue.add(response);
@@ -113,13 +114,6 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
     	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Event Bus Listener)");
     	
     	assertEquals(1, findBehaviours.size());
-    	
-    	bms.installBehaviour(findBehaviours.iterator().next(), frameworkId);
-    	
-    	ManagementResponseDTO response;
-    	
-    	response = queue.poll(10, TimeUnit.SECONDS);
-    	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
     }
 
     @Test
@@ -133,7 +127,7 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
     	
     	ManagementResponseDTO response;
     	
-    	response = queue.poll(10, TimeUnit.SECONDS);
+    	response = queue.poll(20, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
     }
 

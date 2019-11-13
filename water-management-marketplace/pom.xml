@@ -10,8 +10,12 @@
 
     <groupId>com.paremus.brain.iot.marketplace</groupId>
     <artifactId>water-management-marketplace</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 
     <description>
         The Water Management Marketplace - Smart Behaviours for the utilities use case
@@ -121,8 +125,16 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacpp</artifactId>
+            <version>1.5.2-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        -->
 
     </dependencies>
 
@@ -155,6 +167,64 @@
                 <configuration>
                     <skip>true</skip>
                     <inputDirectory>${project.build.directory}/marketplace</inputDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- For Testing the Marketplace -->
+            <!-- Do not deploy the test jar -->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Use the bnd-maven-plugin to make the tester jar -->
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Required to make the maven-jar-plugin pick up the bnd
+                generated manifest. Also avoid packaging empty Jars -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                    <skipIfEmpty>true</skipIfEmpty>
+                </configuration>
+            </plugin>
+            <!-- Use the bnd-maven-plugin to make the tester jar -->
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-testing-maven-plugin</artifactId>
+                <version>4.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testing</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnChanges>false</failOnChanges>
+                    <resolve>
+                        true
+                    </resolve>
+                    <bndruns>
+                        <bndrun>test.bndrun</bndrun>
+                    </bndruns>
                 </configuration>
             </plugin>
         </plugins>

@@ -54,14 +54,27 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
+            <!-- DeepLearning4J snapshots -->
+            <repository>
+                <id>sonatype-snapshots</id>
+                <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                <releases>
+                    <enabled>false</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+            </repository>
     </repositories>
     
     <modules>
         <module>behaviour-marketplace-maven-plugin</module>
-        <module>water-management-marketplace</module>
         <!--
         <module>security-light-marketplace</module>
         <module>service-robotic-marketplace</module>
         -->
+        <module>water-management-marketplace</module>
+
     </modules>
 </project>
