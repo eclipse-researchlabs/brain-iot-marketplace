@@ -219,9 +219,11 @@
                 </executions>
                 <configuration>
                     <failOnChanges>false</failOnChanges>
+                    <!--
                     <resolve>
                         true
                     </resolve>
+                    -->
                     <bndruns>
                         <bndrun>test.bndrun</bndrun>
                     </bndruns>
