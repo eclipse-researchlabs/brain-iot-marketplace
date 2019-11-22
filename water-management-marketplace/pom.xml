@@ -219,6 +219,7 @@
                 </executions>
                 <configuration>
                     <failOnChanges>false</failOnChanges>
+                    <skip>true</skip>
                     <!--
                     <resolve>
                         true
