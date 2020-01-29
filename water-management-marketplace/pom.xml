@@ -29,24 +29,17 @@
     </distributionManagement>
     
     <dependencies>
-    <!--
-        <dependency>
-            <groupId>eu.brain.iot.water.management</groupId>
-            <artifactId>app</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.cea.brainiot</groupId>
-            <artifactId>app</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        -->
 
         <dependency>
             <groupId>eu.brain.iot.water.management</groupId>
-            <artifactId>impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>api</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>eu.brain.iot.water.management</groupId>
+            <artifactId>mlbehaviour</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
