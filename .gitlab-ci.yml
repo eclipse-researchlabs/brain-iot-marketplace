@@ -5,6 +5,7 @@
 image: maven:3-jdk-11
 
 variables:
+  MAVEN_RESOLVER: "clean -am bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--batch-mode -s .m2/settings.xml"
   MAVEN_DEPLOY_OPTS: "-DaltReleaseDeploymentRepository=brain-iot-releases::default::https://nexus.repository-pert.ismb.it/repository/maven-releases -DaltSnapshotDeploymentRepository=brain-iot-snapshots::default::https://nexus.repository-pert.ismb.it/repository/maven-snapshots"
@@ -19,12 +20,12 @@ cache:
 marketplace-build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS package
+    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER package
 
 marketplace-test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS verify
+    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER verify
   artifacts:
     paths:
     - behaviour-marketplace-maven-plugin/target/surefire-reports/*.txt
@@ -34,8 +35,8 @@ marketplace-test:
 marketplace-deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -am -pl behaviour-marketplace-maven-plugin install org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
-    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -pl !:behaviour-marketplace,!behaviour-marketplace-maven-plugin package site:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER $MAVEN_DEPLOY_OPTS -am -pl behaviour-marketplace-maven-plugin install org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER $MAVEN_DEPLOY_OPTS -pl !:behaviour-marketplace,!behaviour-marketplace-maven-plugin package site:deploy
   artifacts:
     paths:
     - behaviour-marketplace-maven-plugin/target/surefire-reports/*.txt
