@@ -20,12 +20,12 @@ cache:
 marketplace-build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER package
+    - mvn $MAVEN_CLI_OPTS package
 
 marketplace-test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER verify
+    - mvn $MAVEN_CLI_OPTS -am verify
   artifacts:
     paths:
     - behaviour-marketplace-maven-plugin/target/surefire-reports/*.txt
@@ -35,8 +35,8 @@ marketplace-test:
 marketplace-deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER $MAVEN_DEPLOY_OPTS -am -pl behaviour-marketplace-maven-plugin install org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
-    - mvn $MAVEN_CLI_OPTS $MAVEN_RESOLVER $MAVEN_DEPLOY_OPTS -pl !:behaviour-marketplace,!behaviour-marketplace-maven-plugin package site:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -am -pl behaviour-marketplace-maven-plugin install org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
+    - mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS -pl !:behaviour-marketplace,!behaviour-marketplace-maven-plugin package site:deploy
   artifacts:
     paths:
     - behaviour-marketplace-maven-plugin/target/surefire-reports/*.txt
