@@ -112,7 +112,7 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
     @Test
     public void testSensinactBridge() throws Exception {
     	
-    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Event Bus Listener)");
+    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Sensinact bridge)");
     	
     	assertEquals(1, findBehaviours.size());
     	
