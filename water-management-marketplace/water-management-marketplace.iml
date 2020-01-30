@@ -10,8 +10,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: eu.brain.iot.water.management:api:1.0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: fr.cea.brainiot:api:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: eu.brain.iot.water.management:mlbehaviour:1.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.paremus.brain.iot:eventing.impl:0.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.felix:org.apache.felix.converter:1.0.9-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.paremus.brain.iot:deeplearning4j-modelimport-osgi:0.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.paremus.brain.iot:deeplearning4j-nn-osgi:0.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.deeplearning4j:deeplearning4j-nn:1.0.0-beta5" level="project" />
@@ -99,10 +100,8 @@
     <orderEntry type="library" name="Maven: com.paremus.brain.iot:nd4j-backend-native-osgi:linux-x86_64:0.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.paremus.brain.iot:nd4j-backend-native-osgi:macosx-x86_64:0.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.paremus.brain.iot:nd4j-backend-native-osgi:windows-x86_64:0.0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.paremus.brain.iot:eventing.impl:0.0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.felix:org.apache.felix.converter:1.0.9-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: fr.cea.brainiot:bridge.api:1.0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: fr.cea.brainiot:bridge.impl:1.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: fr.cea.brainiot.eventbus:api:1.0.2-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: fr.cea.brainiot.eventbus:impl:1.0.2-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.mockito:mockito-core:2.23.0" level="project" />
     <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.9.0" level="project" />
     <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy-agent:1.9.0" level="project" />

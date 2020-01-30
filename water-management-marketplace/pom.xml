@@ -43,15 +43,15 @@
         </dependency>
 
         <dependency>
-            <groupId>fr.cea.brainiot</groupId>
+            <groupId>fr.cea.brainiot.eventbus</groupId>
             <artifactId>api</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>fr.cea.brainiot</groupId>
+            <groupId>fr.cea.brainiot.eventbus</groupId>
             <artifactId>impl</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
 
         <!-- Jackson -->
