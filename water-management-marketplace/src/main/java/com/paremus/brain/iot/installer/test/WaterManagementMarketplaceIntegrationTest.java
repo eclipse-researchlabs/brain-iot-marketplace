@@ -34,6 +34,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 
+import static com.paremus.brain.iot.management.api.ManagementResponseDTO.ResponseCode.INSTALL_OK;
 import static org.osgi.framework.Constants.FRAMEWORK_UUID;
 
 
@@ -111,9 +112,16 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
     @Test
     public void testSensinactBridge() throws Exception {
     	
-    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Event Bus Listener)");
+    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Sensinact bridge)");
     	
     	assertEquals(1, findBehaviours.size());
+    	
+    	bms.installBehaviour(findBehaviours.iterator().next(), frameworkId);
+    	
+    	ManagementResponseDTO response;
+    	
+    	response = queue.poll(20, TimeUnit.SECONDS);
+    	assertEquals(response.message, INSTALL_OK, response.code);
     }
 
     @Test
@@ -128,7 +136,7 @@ public class WaterManagementMarketplaceIntegrationTest implements SmartBehaviour
     	ManagementResponseDTO response;
     	
     	response = queue.poll(20, TimeUnit.SECONDS);
-    	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
+    	assertEquals(response.message, INSTALL_OK, response.code);
     }
 
 

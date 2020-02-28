@@ -29,36 +29,36 @@
     </distributionManagement>
     
     <dependencies>
-    <!--
-        <dependency>
-            <groupId>eu.brain.iot.water.management</groupId>
-            <artifactId>app</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.cea.brainiot</groupId>
-            <artifactId>app</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        -->
 
         <dependency>
             <groupId>eu.brain.iot.water.management</groupId>
-            <artifactId>impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.cea.brainiot</groupId>
             <artifactId>api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>fr.cea.brainiot</groupId>
+            <groupId>eu.brain.iot.water.management</groupId>
+            <artifactId>mlbehaviour</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.cea.brainiot.eventbus</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.cea.brainiot.eventbus</groupId>
             <artifactId>impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.2-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>org.apache.aries.jax.rs</groupId>
+            <artifactId>org.apache.aries.jax.rs.jackson</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
 
@@ -69,6 +69,14 @@
             <version>7.0.0</version>
             <type>pom</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.osgi.enroute</groupId>
+            <artifactId>enterprise-api</artifactId>
+            <version>7.0.0</version>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
             <groupId>com.paremus.brain.iot</groupId>
             <artifactId>eventing.api</artifactId>
@@ -80,7 +88,6 @@
             <artifactId>test-bundles</artifactId>
             <version>7.0.0</version>
             <type>pom</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.osgi.enroute</groupId>
@@ -127,14 +134,38 @@
             <version>4.12</version>
         </dependency>
 
-        <!--
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacpp</artifactId>
-            <version>1.5.2-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>1.5.1</version>
         </dependency>
-        -->
+
+
+        <dependency>
+            <groupId>com.paremus.brain.iot</groupId>
+            <artifactId>deeplearning4j-modelimport-osgi</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.paremus.brain.iot</groupId>
+            <artifactId>deeplearning4j-datavec-iterators-osgi</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.paremus.brain.iot</groupId>
+            <artifactId>deeplearning4j-platform</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
 
     </dependencies>
 
@@ -219,7 +250,6 @@
                 </executions>
                 <configuration>
                     <failOnChanges>false</failOnChanges>
-                    <skip>true</skip>
                     <!--
                     <resolve>
                         true
