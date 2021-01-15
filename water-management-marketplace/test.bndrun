@@ -20,6 +20,8 @@
 	ch.qos.logback.core;version='[1.2.3,1.2.4)',\
 	com.paremus.brain.iot.eventing.api;version='[0.0.1,0.0.2)',\
 	com.paremus.brain.iot.eventing.impl;version='[0.0.1,0.0.2)',\
+	com.paremus.brain.iot.message.integrity.api;version='[0.0.1,0.0.2)',\
+	com.paremus.brain.iot.message.integrity.insecure.impl;version='[0.0.1,0.0.2)',\
 	com.paremus.brain.iot.installer.api;version='[0.0.1,0.0.2)',\
 	com.paremus.brain.iot.installer.impl;version='[0.0.1,0.0.2)',\
 	com.paremus.brain.iot.management.api;version='[0.0.1,0.0.2)',\
