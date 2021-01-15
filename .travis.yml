@@ -20,6 +20,7 @@ script:
 deploy:
   provider: script
   script: mvn $MAVEN_CLI_OPTS $MAVEN_DEPLOY_OPTS clean package org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
+  skip_cleanup: true
   on:
     branch: main
 
