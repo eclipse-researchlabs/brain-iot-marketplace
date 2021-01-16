@@ -1,0 +1,67 @@
+-standalone: target/index.xml
+
+-runsystemcapabilities: ${native_capability}
+
+-resolve.effective: active
+
+# Used by Objenesis/Mockito and not actually optional
+-runsystempackages: sun.reflect
+
+-runfw: org.eclipse.osgi
+#-runfw: org.apache.felix.framework;version='[6.0.2,6.0.2]'
+-runee: JavaSE-1.8
+-runtrace: true
+
+-runrequires: \
+	bnd.identity;id='ros.edge.node.marketplace.test',\
+	bnd.identity;id='com.paremus.brain.iot.management.impl'
+	
+-runbundles: \
+    biz.aQute.bndlib;version='[4.3.0,4.3.1)', biz.aQute.repository;version='[4.3.0,4.3.1)', ch.qos.logback.classic;version='[1.2.3,1.2.4)', ch.qos.logback.core;version='[1.2.3,1.2.4)', com.paremus.brain.iot.eventing.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.eventing.impl;version='[0.0.1,0.0.2)', com.paremus.brain.iot.installer.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.installer.impl;version='[0.0.1,0.0.2)', com.paremus.brain.iot.management.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.management.impl;version='[0.0.1,0.0.2)', com.paremus.brain.iot.message.integrity.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.message.integrity.insecure.impl;version='[0.0.1,0.0.2)', com.paremus.brain.iot.resolver.impl;version='[0.0.1,0.0.2)', org.apache.felix.configadmin;version='[1.9.8,1.9.9)', org.apache.felix.scr;version='[2.1.10,2.1.11)', org.apache.servicemix.bundles.junit;version='[4.12.0,4.12.1)', org.osgi.util.function;version='[1.1.0,1.1.1)', org.osgi.util.pushstream;version='[1.0.0,1.0.1)', ros.edge.node.marketplace.test;version='[0.0.1,0.0.2)', slf4j.api;version='[1.7.25,1.7.26)'
+    
+
+#	eu.brain.iot.robot.config;version='[1.0.0,1.0.1)',\
+#	org.apache.felix.configurator;version='[1.0.6,1.0.7)'
+	
+-runsystempackages: \
+	javax.naming,\
+	javax.naming.ldap,\
+	javax.net,\
+	javax.net.ssl,\
+	javax.sql,\
+	javax.xml,\
+	javax.xml.parsers,\
+	javax.xml.namespace,\
+	javax.xml.bind,\
+	javax.xml.transform,\
+	javax.xml.transform.stream,\
+	javax.xml.transform.*,\
+	javax.crypto,\
+	javax.crypto.spec,\
+	org.xml.sax,\
+	org.xml.sax.ext,\
+	org.xml.sax.helpers,\
+	org.w3c.dom,\
+	javax.annotation,\
+	javax.annotation.meta,\
+	javax.management,\
+	javax.management.modelmbean,\
+	javax.management.remote,\
+	javax.security.auth,\
+	javax.security.auth.callback,\
+	javax.security.auth.kerberos,\
+	javax.security.auth.x500,\
+	javax.security.auth.*,\
+	javax.security.cert,\
+	javax.imageio,\
+	javax.imageio.stream,\
+	javax.imageio.plugins.jpeg,\
+	javax.tools,\
+	sun.reflect,\
+	sun.*,\
+	sun.net.spi.nameservice,\
+	sun.net.spi.nameservice.*,\
+	javax.*
+		
+
+	

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<parent>
+        <groupId>com.paremus.brain.iot</groupId>
+        <artifactId>behaviour-marketplace</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    
+    <groupId>com.paremus.brain.iot.marketplace</groupId>
+	<artifactId>service-robotic-marketplace-update</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<description>
+        The Service Robotc Edge Node Marketplace - Smart Behaviours for the utilities use case
+    </description>
+
+	<distributionManagement>
+		<site>
+			<id>brain-iot-nexus-marketplace</id>
+			<url>dav:https://nexus.repository-pert.ismb.it/repository/marketplaces/${project.groupId}/${project.artifactId}/${project.version}</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<bnd.version>5.1.2</bnd.version>
+	</properties>
+
+  <repositories>
+    <!--      <repository>
+			<id>spring</id>
+			<name>Spring Libs Repository</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+		
+		<repository>
+            <id>jfrog</id>
+            <name>jfrog libs-releases</name>
+            <url>http://repo.jfrog.org/artifactory/libs-releases/</url>
+        </repository>
+	-->	
+        <repository>
+            <id>OSGi</id>
+            <name>OSGi public binaries</name>
+            <url>https://oss.sonatype.org/content/groups/osgi</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>Apache Snapshots</id>
+            <url>https://repository.apache.org/content/groups/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        
+        <repository>
+            <id>brain-iot-releases</id>
+            <name>BRAIN-IoT Releases</name>
+            <url>https://nexus.repository-pert.ismb.it/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>brain-iot-snapshots</id>
+            <name>BRAIN-IoT Snapshots</name>
+            <url>https://nexus.repository-pert.ismb.it/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+            <!-- DeepLearning4J snapshots -->
+            <repository>
+                <id>sonatype-snapshots</id>
+                <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                <releases>
+                    <enabled>false</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+            </repository>
+           
+
+    </repositories>
+    
+    <pluginRepositories>
+   		 
+        <pluginRepository>
+            <id>brain-iot-releases</id>
+            <name>BRAIN-IoT Releases</name>
+            <url>https://nexus.repository-pert.ismb.it/repository/maven-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>brain-iot-snapshots</id>
+            <name>BRAIN-IoT Snapshots</name>
+            <url>https://nexus.repository-pert.ismb.it/repository/maven-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+    
+	<dependencies>
+	<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging 
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.2</version>
+	</dependency> -->
+
+	<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient 
+	<dependency>
+		<groupId>commons-httpclient</groupId>
+		<artifactId>commons-httpclient</artifactId>
+		<version>3.1</version>
+	</dependency>-->
+
+<!--	<dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>eu.brain.iot.robot.config</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<scope>runtime</scope>
+		</dependency>
+  	<dependency>
+			<groupId>org.ros.rosjava_bootstrap</groupId>
+			<artifactId>message_generation</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ros.rosjava_core</groupId>
+			<artifactId>rosjava</artifactId>
+			<version>0.2.2</version>
+		</dependency>-->
+		<dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>door.impl</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>eu.brain.iot.ros.edge.node</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>eu.brain.iot.robot.tables.creator</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			
+		</dependency>
+		
+		<dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>eu.brain.iot.robot.tables.queryer</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			
+		</dependency>
+		
+		<dependency>
+			<groupId>eu.brain.iot.service.robotic</groupId>
+			<artifactId>eu.brain.iot.robot.behaviour</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Dependencies used in testing -->
+		<dependency>
+			<groupId>org.osgi.enroute</groupId>
+			<artifactId>osgi-api</artifactId>
+			<version>7.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.paremus.brain.iot</groupId>
+			<artifactId>eventing.api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.osgi.enroute</groupId>
+			<artifactId>test-bundles</artifactId>
+			<version>7.0.0</version>
+			<type>pom</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi.enroute</groupId>
+			<artifactId>impl-index</artifactId>
+			<version>7.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi.enroute</groupId>
+			<artifactId>debug-bundles</artifactId>
+			<version>7.0.0</version>
+			<type>pom</type>
+		</dependency>
+
+		<!--resolution dependencies -->
+		<dependency>
+			<groupId>com.paremus.brain.iot</groupId>
+			<artifactId>eventing.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paremus.brain.iot</groupId>
+			<artifactId>installer.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paremus.brain.iot</groupId>
+			<artifactId>resolver.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paremus.brain.iot</groupId>
+			<artifactId>management.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+            <groupId>com.paremus.brain.iot</groupId>
+            <artifactId>message.integrity.insecure.impl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.log</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.resolver</artifactId>
+			<version>1.10.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework 
+<dependency>
+    <groupId>org.apache.felix</groupId>
+    <artifactId>org.apache.felix.framework</artifactId>
+    <version>6.0.2</version>
+</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.log -->
+<dependency>
+    <groupId>org.osgi</groupId>
+    <artifactId>org.osgi.service.log</artifactId>
+    <version>1.4.0</version>
+</dependency>
+		
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.paremus.brain.iot.maven</groupId>
+				<artifactId>behaviour-marketplace-maven-plugin</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-webdav-jackrabbit</artifactId>
+						<version>2.8</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<skip>true</skip>
+					<inputDirectory>${project.build.directory}/marketplace</inputDirectory>
+				</configuration>
+			</plugin>
+
+
+			<!-- For Testing the Marketplace -->
+	<!-- Do not deploy the test jar -->
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-deploy-plugin</artifactId>
+		<version>2.8.2</version>
+		<configuration>
+			<skip>true</skip>
+		</configuration>
+	</plugin>
+
+			<!-- Use the bnd-maven-plugin to make the tester jar -->
+			<plugin>
+				<groupId>biz.aQute.bnd</groupId>
+				<artifactId>bnd-maven-plugin</artifactId>
+				<version>${bnd.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>bnd-process</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Required to make the maven-jar-plugin pick up the bnd generated manifest. 
+				Also avoid packaging empty Jars -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+					<skipIfEmpty>true</skipIfEmpty>
+				</configuration>
+			</plugin>
+			
+		<!----> 	<plugin>
+				<groupId>biz.aQute.bnd</groupId>
+				<artifactId>bnd-testing-maven-plugin</artifactId>
+				<version>${bnd.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>testing</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnChanges>false</failOnChanges>
+					<bndruns>
+						<bndrun>test.bndrun</bndrun>
+					</bndruns>
+		<!--  			<bundles>
+            <bundle>bundles/org.osgi.service.log-1.4.0.jar</bundle>
+            <bundle>bundles/org.apache.felix.framework-6.0.2.jar</bundle>
+            <bundle>bundles/org.apache.felix.gogo.command-0.16.0.jar</bundle>
+            <bundle>bundles/org.apache.felix.gogo.runtime-1.0.2.jar</bundle>
+            <bundle>bundles/org.apache.felix.gogo.shell-0.12.0.jar</bundle>
+
+        </bundles>  -->
+        
+				</configuration>
+			</plugin>  
+			
+			
+		<!--	--><plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-resolver-maven-plugin</artifactId>
+                <version>${bnd.version}</version>
+               
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <bndruns>
+                                <bndrun>test.bndrun</bndrun>
+                            </bndruns>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+	<!--		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<executions>
+			  		<execution>
+						<id>execution</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>org.ros.rosjava_core</groupId>
+							<artifactId>org.ros.rosjava_core.rosjava</artifactId>
+							<version>0.2.2</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/libs/org.ros.rosjava_core.rosjava-0.2.2.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>execution2</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>org.ros.rosjava_bootstrap</groupId>
+							<artifactId>org.ros.rosjava_bootstrap.message_generation</artifactId>
+							<version>0.2.1</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/libs/org.ros.rosjava_bootstrap.message_generation-0.2.1.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>execution5</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>org.apache.commons</groupId>
+							<artifactId>com.springsource.org.apache.commons.httpclient</artifactId>
+							<version>3.1.0</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/libs/com.springsource.org.apache.commons.httpclient-3.1.0.jar</file>
+						</configuration>
+					</execution> 
+					<execution>
+						<id>execution6</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>org.apache.commons</groupId>
+							<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+							<version>1.1.1</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/libs/com.springsource.org.apache.commons.logging-1.1.1.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		-->	
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-install-plugin</artifactId>
+										<versionRange>[2.5.2,)</versionRange>
+										<goals>
+											<goal>install-file</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>biz.aQute.bnd</groupId>
+										<artifactId>bnd-maven-plugin</artifactId>
+										<versionRange>[5.1.2,)</versionRange>
+										<goals>
+											<goal>bnd-process</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.paremus.brain.iot.maven</groupId>
+										<artifactId>behaviour-marketplace-maven-plugin</artifactId>
+										<versionRange>0.0.1-SNAPSHOT</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+</project>
+
+<!-- mvn clean $MAVEN_DEPLOY_OPTS package site:deploy  -->
