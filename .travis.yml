@@ -13,6 +13,7 @@ cache:
      - .m2/repository
 
 install:
+  - mvn $MAVEN_CLI_OPTS initialize
   - mvn $MAVEN_CLI_OPTS -Dmaven.test.skip=true install
 
 script:
