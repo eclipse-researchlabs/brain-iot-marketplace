@@ -13,7 +13,7 @@
     
     <groupId>com.paremus.brain.iot.marketplace</groupId>
 	<artifactId>service-robotic-marketplace-update</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<description>
@@ -30,23 +30,11 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bnd.version>5.1.2</bnd.version>
 	</properties>
 
   <repositories>
-    <!--      <repository>
-			<id>spring</id>
-			<name>Spring Libs Repository</name>
-			<url>https://repo.spring.io/libs-release</url>
-		</repository>
-		
-		<repository>
-            <id>jfrog</id>
-            <name>jfrog libs-releases</name>
-            <url>http://repo.jfrog.org/artifactory/libs-releases/</url>
-        </repository>
-	-->	
         <repository>
             <id>OSGi</id>
             <name>OSGi public binaries</name>
@@ -135,36 +123,6 @@
     
     
 	<dependencies>
-	<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging 
-	<dependency>
-		<groupId>commons-logging</groupId>
-		<artifactId>commons-logging</artifactId>
-		<version>1.2</version>
-	</dependency> -->
-
-	<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient 
-	<dependency>
-		<groupId>commons-httpclient</groupId>
-		<artifactId>commons-httpclient</artifactId>
-		<version>3.1</version>
-	</dependency>-->
-
-<!--	<dependency>
-			<groupId>eu.brain.iot.service.robotic</groupId>
-			<artifactId>eu.brain.iot.robot.config</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-  	<dependency>
-			<groupId>org.ros.rosjava_bootstrap</groupId>
-			<artifactId>message_generation</artifactId>
-			<version>0.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ros.rosjava_core</groupId>
-			<artifactId>rosjava</artifactId>
-			<version>0.2.2</version>
-		</dependency>-->
 		<dependency>
 			<groupId>eu.brain.iot.service.robotic</groupId>
 			<artifactId>door.impl</artifactId>
@@ -173,21 +131,19 @@
         <dependency>
 			<groupId>eu.brain.iot.service.robotic</groupId>
 			<artifactId>eu.brain.iot.ros.edge.node</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>eu.brain.iot.service.robotic</groupId>
-			<artifactId>eu.brain.iot.robot.tables.creator</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-			
+    		<artifactId>eu.brain.iot.robot.tables.creator</artifactId>
+    		<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>eu.brain.iot.service.robotic</groupId>
 			<artifactId>eu.brain.iot.robot.tables.queryer</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
-			
 		</dependency>
 		
 		<dependency>
@@ -265,12 +221,7 @@
 			<artifactId>org.apache.felix.resolver</artifactId>
 			<version>1.10.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework 
-<dependency>
-    <groupId>org.apache.felix</groupId>
-    <artifactId>org.apache.felix.framework</artifactId>
-    <version>6.0.2</version>
-</dependency>-->
+		
 		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.log -->
 <dependency>
     <groupId>org.osgi</groupId>
@@ -368,15 +319,6 @@
 					<bndruns>
 						<bndrun>test.bndrun</bndrun>
 					</bndruns>
-		<!--  			<bundles>
-            <bundle>bundles/org.osgi.service.log-1.4.0.jar</bundle>
-            <bundle>bundles/org.apache.felix.framework-6.0.2.jar</bundle>
-            <bundle>bundles/org.apache.felix.gogo.command-0.16.0.jar</bundle>
-            <bundle>bundles/org.apache.felix.gogo.runtime-1.0.2.jar</bundle>
-            <bundle>bundles/org.apache.felix.gogo.shell-0.12.0.jar</bundle>
-
-        </bundles>  -->
-        
 				</configuration>
 			</plugin>  
 			
@@ -400,72 +342,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-	<!--		<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
-				<executions>
-			  		<execution>
-						<id>execution</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>org.ros.rosjava_core</groupId>
-							<artifactId>org.ros.rosjava_core.rosjava</artifactId>
-							<version>0.2.2</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/libs/org.ros.rosjava_core.rosjava-0.2.2.jar</file>
-						</configuration>
-					</execution>
-					<execution>
-						<id>execution2</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>org.ros.rosjava_bootstrap</groupId>
-							<artifactId>org.ros.rosjava_bootstrap.message_generation</artifactId>
-							<version>0.2.1</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/libs/org.ros.rosjava_bootstrap.message_generation-0.2.1.jar</file>
-						</configuration>
-					</execution>
-					<execution>
-						<id>execution5</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>org.apache.commons</groupId>
-							<artifactId>com.springsource.org.apache.commons.httpclient</artifactId>
-							<version>3.1.0</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/libs/com.springsource.org.apache.commons.httpclient-3.1.0.jar</file>
-						</configuration>
-					</execution> 
-					<execution>
-						<id>execution6</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>org.apache.commons</groupId>
-							<artifactId>com.springsource.org.apache.commons.logging</artifactId>
-							<version>1.1.1</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/libs/com.springsource.org.apache.commons.logging-1.1.1.jar</file>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		-->	
-
 		</plugins>
 
 		<pluginManagement>

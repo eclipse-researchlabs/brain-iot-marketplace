@@ -111,7 +111,7 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
         queue.add(response);
     }
 
- /*    @Test
+     @Test
     public void testDoor() throws Exception {
     	
     	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Smart Door)");
@@ -124,12 +124,12 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	
     	response = queue.poll(10, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
-    }*/
+    }
 
 	/* */  @Test
     public void testRosEdgeNode() throws Exception {
     	
-    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Smart Robot)");
+    	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=ROS Edge Node)");
     	
     	assertEquals(1, findBehaviours.size());
     	
@@ -141,7 +141,7 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
     }
     
- /*    @Test
+ /*  */  @Test
     public void testTablesCreator() throws Exception {
     	
     	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Warehouse Module: Tables Creator)");
@@ -154,9 +154,9 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	
     	response = queue.poll(10, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
-    }*/
+    }
 
- /*    @Test
+ /* */   @Test
     public void testTablesQueryer() throws Exception {
     	
     	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Warehouse Module: Tables Queryer)");
@@ -169,9 +169,9 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	
     	response = queue.poll(10, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
-    }*/
+    }
 
-  /*  @Test
+  /* */ @Test
     public void testRobotBehaviour() throws Exception {
     	
     	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Robot Behavior)");
@@ -184,6 +184,6 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	
     	response = queue.poll(10, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
-    }*/
+    }
     
 }
