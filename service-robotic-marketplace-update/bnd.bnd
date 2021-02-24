@@ -1,3 +1,0 @@
-
-# Run all integration tests which are named xyzTest 
-Test-Cases: ${classes;CONCRETE;PUBLIC;NAMED;*Test}

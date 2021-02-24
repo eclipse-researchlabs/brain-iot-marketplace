@@ -69,13 +69,7 @@
     </repositories>
     
     <modules>
-        
-        <module>behaviour-marketplace-maven-plugin</module>
-               
-        <module>security-light-marketplace</module>
-        <module>service-robotic-marketplace</module>
-        <module>water-management-marketplace</module>
-		<module>service-robotic-marketplace-update</module>
+        <module>service-robotic-marketplace-anomalies-reaction</module>
 
     </modules>
 </project>
