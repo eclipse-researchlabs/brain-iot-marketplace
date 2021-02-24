@@ -70,6 +70,5 @@
     
     <modules>
         <module>service-robotic-marketplace-anomalies-reaction</module>
-
     </modules>
 </project>
