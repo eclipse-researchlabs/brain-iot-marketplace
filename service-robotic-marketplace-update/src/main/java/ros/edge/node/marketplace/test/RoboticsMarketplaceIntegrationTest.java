@@ -185,5 +185,35 @@ public class RoboticsMarketplaceIntegrationTest implements SmartBehaviour<Manage
     	response = queue.poll(10, TimeUnit.SECONDS);
     	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
     }
+  
+/*  @Test
+  public void testSensiNact() throws Exception {
+  	
+  	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=SensiNact Test)");
+  	
+  	assertEquals(1, findBehaviours.size());
+  	
+  	bms.installBehaviour(findBehaviours.iterator().next(), frameworkId);
+  	
+  	ManagementResponseDTO response;
+  	
+  	response = queue.poll(10, TimeUnit.SECONDS);
+  	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
+  }*/
+  
+  @Test
+  public void testStartButton() throws Exception {
+  	
+  	Collection<BehaviourDTO> findBehaviours = bms.findBehaviours("(name=Service Robotic Example - Start Button)");
+  	
+  	assertEquals(1, findBehaviours.size());
+  	
+  	bms.installBehaviour(findBehaviours.iterator().next(), frameworkId);
+  	
+  	ManagementResponseDTO response;
+  	
+  	response = queue.poll(10, TimeUnit.SECONDS);
+  	assertEquals(ManagementResponseDTO.ResponseCode.INSTALL_OK, response.code);
+  }
     
 }
